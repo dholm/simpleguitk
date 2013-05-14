@@ -1,4 +1,5 @@
 import Tkinter
+import tkFont
 
 from .canvas import Canvas
 from .control_objects import Button
@@ -88,6 +89,12 @@ class Frame(object):
 
     def set_keyup_handler(self, key_handler):
         self._input.set_keyup_handler(key_handler)
+
+    def set_canvas_background(self, color):
+        self._canvas.set_background(color)
+
+    def get_canvas_textwidth(self, text, size, face='serif'):
+        return tkFont.Font(size=size, family=face).measure(text)
 
 
 def create_frame(title, canvas_width, canvas_height, control_width=200):

@@ -22,6 +22,9 @@ class Canvas(object):
     def destroy(self):
         self._draw_handler_timer.stop()
 
+    def set_background(self, color):
+        self._canvas.config(background=color)
+
     def set_draw_handler(self, draw_handler):
         self._draw_handler_fn = draw_handler
         self._draw_handler_timer = create_timer(Canvas.IntervalMs,
