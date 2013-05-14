@@ -18,7 +18,7 @@ class Canvas(object):
             self._canvas.delete('all')
             self._draw_handler_fn(self)
 
-    def _shutdown(self):
+    def destroy(self):
         self._draw_handler_timer.stop()
 
     def set_draw_handler(self, draw_handler):
