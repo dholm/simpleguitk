@@ -4,7 +4,8 @@ from .timers import create_timer
 
 
 class Canvas(object):
-    IntervalMs = 125
+    Fps = 15
+    IntervalMs = 1000 // Fps
 
     def __init__(self, master, width, height):
         self._canvas = Tkinter.Canvas(master, width=width, height=height,
@@ -20,6 +21,7 @@ class Canvas(object):
             self._draw_handler_fn(self)
 
     def destroy(self):
+        self._draw_handler_fn = None
         self._draw_handler_timer.stop()
 
     def set_background(self, color):
