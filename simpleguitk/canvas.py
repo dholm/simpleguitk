@@ -30,7 +30,8 @@ class Canvas(object):
 
     def draw_text(self, text, point, font_size, font_color, font_face='serif'):
         self._canvas.create_text(point, text=text, fill=font_color,
-                                 font=(font_face, font_size))
+                                 font=(font_face, font_size),
+                                 anchor=Tkinter.SW)
 
     def draw_line(self, point1, point2, line_width, line_color):
         self._canvas.create_line(point1[0], point1[1], point2[0], point2[1],
