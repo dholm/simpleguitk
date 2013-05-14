@@ -30,3 +30,13 @@ class Canvas(object):
     def draw_text(self, text, point, font_size, font_color, font_face='serif'):
         self._canvas.create_text(point, text=text, fill=font_color,
                                  font=(font_face, font_size))
+
+    def draw_line(self, point1, point2, line_width, line_color):
+        self._canvas.create_line(point1[0], point1[1], point2[0], point2[1],
+                                 width=line_width, fill=line_color)
+
+    def draw_polygon(self, point_list, line_width, line_color,
+                     fill_color=None):
+        points = [y for x in point_list for y in x]
+        self._canvas.create_polygon(*points, width=line_width, fill=fill_color,
+                                    outline=line_color)
