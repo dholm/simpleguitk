@@ -50,9 +50,7 @@ class Canvas(object):
 
     def draw_circle(self, center_point, radius, line_width, line_color,
                     fill_color=None):
-        self._canvas.create_oval(x0=(center_point[0] - radius),
-                                 y0=(center_point[1] - radius),
-                                 x1=(center_point[0] + radius),
-                                 y1=(center_point[1] + radius),
-                                 outline=line_color, fill=fill_color,
+        points = [(center_point[0] - radius), (center_point[1] - radius),
+                  (center_point[0] + radius), (center_point[1] + radius)]
+        self._canvas.create_oval(points, outline=line_color, fill=fill_color,
                                  width=line_width)
