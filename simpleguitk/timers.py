@@ -30,5 +30,15 @@ class Timer(object):
         return self._running
 
 
+_timers = []
+
+
+def destroy():
+    for timer in _timers:
+        timer.stop()
+
+
 def create_timer(interval, timer_handler):
-    return Timer(interval, timer_handler)
+    timer = Timer(interval, timer_handler)
+    _timers.append(timer)
+    return timer

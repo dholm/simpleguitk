@@ -4,6 +4,7 @@ import tkFont
 from .canvas import Canvas
 from .control_objects import Button
 from .input import Input
+from .timers import destroy as destroy_timers
 
 
 class Frame(object):
@@ -61,6 +62,7 @@ class Frame(object):
         self._mouse_frame = mouse
 
     def _shutdown(self):
+        destroy_timers()
         self._canvas.destroy()
         self._root.destroy()
 
