@@ -7,7 +7,8 @@ class Canvas(object):
     IntervalMs = 125
 
     def __init__(self, master, width, height):
-        self._canvas = Tkinter.Canvas(master, width=width, height=height)
+        self._canvas = Tkinter.Canvas(master, width=width, height=height,
+                                      background='black')
         self._canvas.grid(row=0, column=1, rowspan=2)
 
         self._draw_handler_fn = None
@@ -40,3 +41,12 @@ class Canvas(object):
         points = [y for x in point_list for y in x]
         self._canvas.create_polygon(*points, width=line_width, fill=fill_color,
                                     outline=line_color)
+
+    def draw_circle(self, center_point, radius, line_width, line_color,
+                    fill_color=None):
+        self._canvas.create_oval(x0=(center_point[0] - radius),
+                                 y0=(center_point[1] - radius),
+                                 x1=(center_point[0] + radius),
+                                 y1=(center_point[1] + radius),
+                                 outline=line_color, fill=fill_color,
+                                 width=line_width)
