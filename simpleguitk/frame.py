@@ -2,6 +2,7 @@ import Tkinter
 
 from .canvas import Canvas
 from .control_objects import Button
+from .input import Input
 
 
 class Frame(object):
@@ -52,6 +53,7 @@ class Frame(object):
         self._control_frame = self._create_control_frame()
         self._controls = []
 
+        self._input = Input(self._root)
         (stats, keys, mouse) = self._create_status_frame()
         self._stats_frame = stats
         self._key_frame = keys
@@ -74,6 +76,18 @@ class Frame(object):
     def add_label(self, text):
         label = Tkinter.Label(self._control_frame, text=text)
         self._controls.append(label)
+
+    def add_input(self, text, input_handler, width):
+        self.add_label(text)
+        entry = Tkinter.Entry(self._control_frame, width=width)
+        entry.bind('<Return>', input_handler)
+        self._controls.append(entry)
+
+    def set_keydown_handler(self, key_handler):
+        self._input.set_keydown_handler(key_handler)
+
+    def set_keyup_handler(self, key_handler):
+        self._input.set_keyup_handler(key_handler)
 
 
 def create_frame(title, canvas_width, canvas_height, control_width=200):
