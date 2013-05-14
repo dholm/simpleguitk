@@ -4,7 +4,7 @@ from .timers import create_timer
 
 
 class Canvas(object):
-    Fps = 15
+    Fps = 40
     IntervalMs = 1000 // Fps
 
     def __init__(self, master, width, height):
