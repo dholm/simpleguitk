@@ -71,6 +71,10 @@ class Frame(object):
         button = Button(self._control_frame, text, button_handler, width)
         self._controls.append(button)
 
+    def add_label(self, text):
+        label = Tkinter.Label(self._control_frame, text=text)
+        self._controls.append(label)
+
 
 def create_frame(title, canvas_width, canvas_height, control_width=200):
     return Frame(title, canvas_width, canvas_height, control_width)
