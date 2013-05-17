@@ -42,6 +42,11 @@ class Canvas(object):
         self._canvas.create_line(point1[0], point1[1], point2[0], point2[1],
                                  width=line_width, fill=line_color)
 
+    def draw_polyline(self, point_list, line_width, line_color):
+        for i in range(1, len(point_list)):
+            self.draw_line(point_list[i - 1], point_list[i], line_width,
+                           line_color)
+
     def draw_polygon(self, point_list, line_width, line_color,
                      fill_color=None):
         points = [y for x in point_list for y in x]
