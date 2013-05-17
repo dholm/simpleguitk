@@ -1,4 +1,5 @@
 import Tkinter
+import sys
 import tkFont
 
 from .canvas import Canvas
@@ -11,7 +12,7 @@ class Frame(object):
     def _create_root(self, title):
         root = Tkinter.Tk()
         root.wm_title(title)
-        root.protocol('WM_DELETE_WINDOW', self._shutdown)
+        root.protocol('WM_DELETE_WINDOW', root.quit)
         return root
 
     def _create_frame(self, canvas_width, canvas_height, control_width):
@@ -62,12 +63,18 @@ class Frame(object):
         self._mouse_frame = mouse
 
     def _shutdown(self):
-        destroy_timers()
         self._canvas.destroy()
         self._root.destroy()
+        destroy_timers()
+        sys.exit(0)
 
     def start(self):
-        self._root.mainloop()
+        try:
+            self._root.mainloop()
+        except KeyboardInterrupt:
+            self._root.quit()
+        finally:
+            self._shutdown()
 
     def set_draw_handler(self, draw_handler):
         self._canvas.set_draw_handler(draw_handler)

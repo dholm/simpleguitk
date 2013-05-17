@@ -4,7 +4,7 @@ from .timers import create_timer
 
 
 class Canvas(object):
-    Fps = 40
+    Fps = 30
     IntervalMs = 1000 // Fps
 
     def __init__(self, master, width, height):
@@ -16,8 +16,8 @@ class Canvas(object):
         self._draw_handler_timer = None
 
     def _draw_handler(self):
-        if self._draw_handler is not None:
-            self._canvas.delete('all')
+        self._canvas.delete('all')
+        if self._draw_handler_fn is not None:
             self._draw_handler_fn(self)
 
     def destroy(self):
