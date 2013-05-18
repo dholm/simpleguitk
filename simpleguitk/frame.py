@@ -99,6 +99,9 @@ class Frame(object):
     def set_keyup_handler(self, key_handler):
         self._input.set_keyup_handler(key_handler)
 
+    def set_mouseclick_handler(self, mouse_handler):
+        self._input.set_mouseclick_handler(mouse_handler)
+
     def set_canvas_background(self, color):
         self._canvas.set_background(color)
 
