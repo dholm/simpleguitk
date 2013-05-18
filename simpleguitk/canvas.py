@@ -59,3 +59,9 @@ class Canvas(object):
                   (center_point[0] + radius), (center_point[1] + radius)]
         self._canvas.create_oval(points, outline=line_color, fill=fill_color,
                                  width=line_width)
+
+    def draw_image(self, image, center_source, width_height_source,
+                   center_dest, width_height_dest, rotation=0):
+        img = image._get_tkimage(center_source, width_height_source,
+                                 width_height_dest, rotation)
+        self._canvas.create_image(center_dest, image=img)
