@@ -4,7 +4,7 @@ from .timers import create_timer
 
 
 class Canvas(object):
-    Fps = 30
+    Fps = 60
     IntervalMs = 1000 // Fps
 
     def __init__(self, master, width, height):
@@ -19,6 +19,7 @@ class Canvas(object):
         self._canvas.delete('all')
         if self._draw_handler_fn is not None:
             self._draw_handler_fn(self)
+            self._canvas.update_idletasks()
 
     def destroy(self):
         self._draw_handler_fn = None
