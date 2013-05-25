@@ -7,8 +7,7 @@ from PIL import ImageTk
 class Image(object):
     def __init__(self, url):
         image = urllib.urlretrieve(url)[0]
-        self._image = PilImage.open(image)
-        self._image = self._image.convert('RGBA')
+        self._image = PilImage.open(image).convert('RGBA')
         self._versions = {}
 
     def get_width(self):
