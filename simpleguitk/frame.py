@@ -65,16 +65,16 @@ class Frame(object):
         self._mouse_frame = mouse
 
     def _shutdown(self):
+        destroy_timers()
         self._canvas.destroy()
         self._root.destroy()
-        destroy_timers()
         sys.exit(0)
 
     def start(self):
         try:
             self._root.mainloop()
         except KeyboardInterrupt:
-            self._root.quit()
+            pass
         finally:
             self._shutdown()
 
@@ -93,7 +93,7 @@ class Frame(object):
 
     def add_input(self, text, input_handler, width):
         label = self.add_label(text)
-        inp = Input(label, self._control_frame, text, input_handler, width)
+        inp = Input(label, self._control_frame, input_handler, width)
         self._controls.append(inp)
         return inp
 
