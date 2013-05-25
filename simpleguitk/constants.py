@@ -2,6 +2,9 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
+from string import hexdigits
+
+
 ColorMap = {'Aqua': '#00ffff',
             'Black': '#000000',
             'Blue': '#0000ff',
@@ -20,9 +23,11 @@ ColorMap = {'Aqua': '#00ffff',
             'Yellow': '#ffff00'}
 
 
-def map_color(c):
-    if c is None:
+def map_color(color):
+    if color is None:
         return None
-    elif c in ColorMap:
-        return ColorMap[c]
-    return c
+    elif color in ColorMap:
+        return ColorMap[color]
+    elif all(c in hexdigits for c in color):
+        return '#%s' % color
+    return color
