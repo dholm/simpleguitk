@@ -106,6 +106,9 @@ class Frame(object):
     def set_mouseclick_handler(self, mouse_handler):
         self._input.set_mouseclick_handler(mouse_handler)
 
+    def set_mousedrag_handler(self, mouse_handler):
+        self._input.set_mousedrag_handler(mouse_handler)
+
     def set_canvas_background(self, color):
         self._canvas.set_background(color)
 
