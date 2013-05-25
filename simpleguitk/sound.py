@@ -26,6 +26,7 @@ class Sound(object):
     def set_volume(self, volume):
         self._channel.set_volume(volume)
 
+MAX_CHANNELS = 32
 _initialized = False
 _next_channel = 0
 
@@ -34,6 +35,7 @@ def sound_init():
     global _initialized
     import pygame
     pygame.mixer.init()
+    pygame.mixer.set_num_channels(MAX_CHANNELS)
     _initialized = True
 
 
