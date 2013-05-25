@@ -1,12 +1,14 @@
 .. -*- restructuredtext -*-
 
+===========
 SimpleGUITk
 ===========
 
-SimpleGUITk is a wrapper for the `CodeSkulptor <http://www.codeskulptor.org/>`_
-SimpleGUI API using TkInter. CodeSkulptor is a browser-based Python interpreter
-used in the online course "`An Introduction to Interactive Programming in
-Python <https://www.coursera.org/course/interactivepython>`_".
+**SimpleGUITk** is a wrapper for the `CodeSkulptor
+<http://www.codeskulptor.org/>`_ *SimpleGUI* API using *TkInter*.
+*CodeSkulptor* is a browser-based Python interpreter used in the online
+course "`An Introduction to Interactive Programming in Python
+<https://www.coursera.org/course/interactivepython>`_".
 
 
 This wrapper makes it easier to work in the development environment of your
@@ -15,15 +17,18 @@ a web browser.
 
 
 Requirements
-------------
+============
 
- * `Pillow <https://github.com/python-imaging/Pillow>`_ 2.0.0 in order to use
-   images.
- * `Pygame <http://www.pygame.org/>`_ 1.9.0 for sound support.
+ * `Pillow <https://github.com/python-imaging/Pillow>`_ in order to use images.
+ * `Pygame <http://www.pygame.org/>`_ for sound support.
+
+None of these are strict requirements as SimpleGUITk will run without them as
+long as you don't need to use the *SimpleGUI Images* or *SimpleGUI Sounds*
+APIs.
 
 
 Usage
------
+=====
 
 The most practical way to use SimpleGUITk is to use the following import
 statement which makes it easy to switch between SimpleGUI and SimpleGUITk.
@@ -34,3 +39,16 @@ Assuming you intend to eventually run your code in CodeSkulptor make it a habit
 to test it often. As of this writing some of Python's language features are
 unavailable in CodeSkulptor and catching these early on makes it easier to make
 sure your implementation works as expected.
+
+
+Changes
+=======
+
+- **1.0.1**
+  * Translation of TkInter keys to JavaScript keycodes so they will work with
+    implementations that do not use *simplegui.KEY_MAP*.
+  * Support for colors specified as hexadecimal without a leading hash sign.
+  * Bugfixes for older versions of TkInter.
+
+- **1.0.0**
+  * First official release.
