@@ -15,6 +15,9 @@ class Canvas(object):
         self._draw_handler_fn = None
         self._draw_handler_timer = None
 
+    def _get_widget(self):
+        return self._canvas
+
     def _draw_handler(self):
         self._canvas.delete('all')
         if self._draw_handler_fn is not None:

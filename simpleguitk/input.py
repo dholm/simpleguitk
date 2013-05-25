@@ -7,14 +7,14 @@ KEY_MAP = KeyMap()
 
 
 class Input(object):
-    def __init__(self, master):
+    def __init__(self, keyboard_master, mouse_master):
         self._keydown_handler = None
         self._keyup_handler = None
-        master.bind('<KeyPress>', self._keydown)
-        master.bind('<KeyRelease>', self._keyup)
+        keyboard_master.bind('<KeyPress>', self._keydown)
+        keyboard_master.bind('<KeyRelease>', self._keyup)
 
         self._mouse_click_handler = None
-        master.bind('<Button-1>', self._mouse_click)
+        mouse_master.bind('<Button-1>', self._mouse_click)
 
     def _keydown(self, key):
         if self._keydown_handler is not None:

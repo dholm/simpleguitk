@@ -56,7 +56,7 @@ class Frame(object):
         self._control_frame = self._create_control_frame()
         self._controls = []
 
-        self._input = Input(self._root)
+        self._input = Input(self._root, self._canvas._get_widget())
         (stats, keys, mouse) = self._create_status_frame()
         self._stats_frame = stats
         self._key_frame = keys
