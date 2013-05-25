@@ -21,12 +21,9 @@ class Frame(object):
         root.protocol('WM_DELETE_WINDOW', root.quit)
         return root
 
-    def _create_frame(self, canvas_width, canvas_height, control_width):
-        frame = Tkinter.Frame(self._root)
+    def _create_frame(self, width, height):
+        frame = Tkinter.Frame(self._root, width=width, height=height)
         frame.grid()
-        frame.rowconfigure('all', minsize=canvas_height, pad=3)
-        frame.columnconfigure('all', pad=3, minsize=control_width)
-        frame.columnconfigure('all', pad=3, minsize=canvas_width)
         return frame
 
     def _create_canvas(self, width, height):
@@ -35,8 +32,8 @@ class Frame(object):
         canvas = Canvas(frame, width, height)
         return (frame, canvas)
 
-    def _create_control_frame(self):
-        control_frame = Tkinter.Frame(self._frame)
+    def _create_control_frame(self, width):
+        control_frame = Tkinter.Frame(self._frame, width=width)
         control_frame.grid(row=0, column=0)
         return control_frame
 
@@ -52,14 +49,14 @@ class Frame(object):
     def __init__(self, title, canvas_width, canvas_height, control_width):
         self._root = self._create_root(title)
 
-        frame = self._create_frame(canvas_width, canvas_height, control_width)
+        frame = self._create_frame(canvas_width, canvas_height)
         self._frame = frame
 
         (frame, canvas) = self._create_canvas(canvas_width, canvas_height)
         self._canvas_frame = frame
         self._canvas = canvas
 
-        self._control_frame = self._create_control_frame()
+        self._control_frame = self._create_control_frame(control_width)
         self._controls = []
 
         self._input = InputAdapter(self._root, self._canvas._get_widget())

@@ -24,7 +24,7 @@ class Canvas(object):
 
     def _draw_handler(self, master):
         if self._draw_handler_fn is not None:
-            self._canvas.delete('all')
+            self._canvas.delete(Tkinter.ALL)
             self._draw_handler_fn(self)
 
         if self._draw_handler_fn is not None:
