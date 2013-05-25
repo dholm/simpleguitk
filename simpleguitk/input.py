@@ -6,7 +6,7 @@ class KeyMap(object):
 KEY_MAP = KeyMap()
 
 
-class Input(object):
+class InputAdapter(object):
     def __init__(self, keyboard_master, mouse_master):
         self._keydown_handler = None
         self._keyup_handler = None

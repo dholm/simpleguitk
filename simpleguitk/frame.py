@@ -4,7 +4,9 @@ import tkFont
 
 from .canvas import Canvas
 from .control_objects import Button
-from .input import Input
+from .control_objects import Input
+from .control_objects import Label
+from .input import InputAdapter
 from .timers import destroy as destroy_timers
 
 
@@ -56,7 +58,7 @@ class Frame(object):
         self._control_frame = self._create_control_frame()
         self._controls = []
 
-        self._input = Input(self._root, self._canvas._get_widget())
+        self._input = InputAdapter(self._root, self._canvas._get_widget())
         (stats, keys, mouse) = self._create_status_frame()
         self._stats_frame = stats
         self._key_frame = keys
@@ -82,16 +84,18 @@ class Frame(object):
     def add_button(self, text, button_handler, width=None):
         button = Button(self._control_frame, text, button_handler, width)
         self._controls.append(button)
+        return button
 
     def add_label(self, text):
-        label = Tkinter.Label(self._control_frame, text=text)
+        label = Label(self._control_frame, text)
         self._controls.append(label)
+        return label
 
     def add_input(self, text, input_handler, width):
-        self.add_label(text)
-        entry = Tkinter.Entry(self._control_frame, width=width)
-        entry.bind('<Return>', input_handler)
-        self._controls.append(entry)
+        label = self.add_label(text)
+        inp = Input(label, self._control_frame, text, input_handler, width)
+        self._controls.append(inp)
+        return inp
 
     def set_keydown_handler(self, key_handler):
         self._input.set_keydown_handler(key_handler)
