@@ -24,17 +24,18 @@ class Frame(object):
     def _canvas_init(self, width, height):
         canvas_frame = Tkinter.Frame(self._root)
         self._canvas = Canvas(canvas_frame, width, height)
-        canvas_frame.grid(row=0, column=1, rowspan=2)
+        canvas_frame.grid(row=0, column=1, rowspan=2, padx=5, pady=5)
 
     def _control_frame_init(self, width):
         self._control_frame = Tkinter.Frame(self._root, width=width)
-        self._control_frame.grid(row=0, column=0)
+        self._control_frame.grid(row=0, column=0, padx=5, pady=5)
 
     def _input_init(self):
         status_frame = Tkinter.Frame(self._root)
         canvas_widget = self._canvas._get_widget()
         self._input = InputAdapter(status_frame, self._root, canvas_widget)
-        status_frame.grid(row=1, column=0)
+        status_frame.grid(row=1, column=0, sticky=Tkinter.W + Tkinter.E,
+                          padx=5, pady=5)
 
     def __init__(self, title, canvas_width, canvas_height, control_width):
         self._root = self._create_root(title)
@@ -80,8 +81,7 @@ class Frame(object):
         return label
 
     def add_input(self, text, input_handler, width):
-        label = self.add_label(text)
-        inp = Input(label, self._control_frame, input_handler, width)
+        inp = Input(self._control_frame, text, input_handler, width)
         self._controls.append(inp)
         return inp
 

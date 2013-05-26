@@ -35,10 +35,12 @@ class InputAdapter(object):
     def _status_frame_init(self, status_frame):
         key_frame = Tkinter.LabelFrame(status_frame, text='Key')
         self._key_label = Label(key_frame, '')
+
         mouse_frame = Tkinter.LabelFrame(status_frame, text='Mouse')
         self._mouse_label = Label(mouse_frame, '')
-        key_frame.pack(fill=Tkinter.X, expand=True)
-        mouse_frame.pack(fill=Tkinter.X, expand=True)
+
+        key_frame.pack(fill=Tkinter.BOTH, expand=True)
+        mouse_frame.pack(fill=Tkinter.BOTH, expand=True)
 
     def __init__(self, status_frame, key_master, mouse_master):
         self._key_label = None
