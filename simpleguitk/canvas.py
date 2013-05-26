@@ -12,12 +12,17 @@ from .constants import map_color
 class Canvas(object):
     Fps = 60
     IntervalMs = 1000 // Fps
+    MinRefreshMs = 1
 
-    def _elapsed(self):
+    def _next_refresh(self):
         ms = int(round(time.time() * 1000))
         elapsed = ms - self._time
         self._time = ms
-        return elapsed
+
+        if Canvas.IntervalMs < elapsed:
+            return Canvas.MinRefreshMs
+
+        return max(Canvas.IntervalMs - elapsed, Canvas.MinRefreshMs)
 
     def __init__(self, master, width, height):
         self._canvas = Tkinter.Canvas(master, width=width, height=height, bd=2,
@@ -25,7 +30,7 @@ class Canvas(object):
         self._canvas.pack(fill=Tkinter.BOTH, expand=True)
 
         self._draw_handler_fn = None
-        self._time = 0
+        self._time = int(round(time.time() * 1000))
         self._draw_handler(master)
 
     def _get_widget(self):
@@ -39,8 +44,7 @@ class Canvas(object):
         if self._draw_handler_fn is not None:
             self._canvas.update_idletasks()
 
-        refresh_ms = Canvas.IntervalMs - self._elapsed()
-        master.after(refresh_ms, self._draw_handler, master)
+        master.after(self._next_refresh(), self._draw_handler, master)
 
     def destroy(self):
         self._draw_handler_fn = None
