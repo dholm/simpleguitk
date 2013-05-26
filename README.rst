@@ -44,6 +44,13 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.0.3**
+
+  * Prevent the input status labels from resizing dynamically which would cause
+    the canvas to move around on certain events.
+  * Increase of FPS to 100 to better match SimpleGUI in CodeSkulptor.
+
+
 - **1.0.2**
 
   * Display input events in the status frame.
