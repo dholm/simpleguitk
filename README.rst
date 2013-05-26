@@ -44,6 +44,14 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.0.4**
+
+  * Canvas borderes will now render correctly.
+  * The draw handler uses an adaptive timeout so that it will run smoothly at
+    60 FPS just like in CodeSkulptor.
+  * Polygons default fill set to transparent.
+
+
 - **1.0.3**
 
   * Prevent the input status labels from resizing dynamically which would cause
