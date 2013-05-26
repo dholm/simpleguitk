@@ -44,6 +44,11 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.0.5**
+
+  * Ensure canvas refresh is within a reasonable interval.
+
+
 - **1.0.4**
 
   * Canvas borderes will now render correctly.
