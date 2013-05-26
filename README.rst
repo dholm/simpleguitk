@@ -44,11 +44,22 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.0.2**
+
+  * Display input events in the status frame.
+  * Ignore case on color codes when using named colors.
+  * Input control events are sent as strings like in SimpleGUI.
+  * Several minor bugfixes
+
+
 - **1.0.1**
+
   * Translation of TkInter keys to JavaScript keycodes so they will work with
     implementations that do not use *simplegui.KEY_MAP*.
   * Support for colors specified as hexadecimal without a leading hash sign.
   * Bugfixes for older versions of TkInter.
 
+
 - **1.0.0**
+
   * First official release.
