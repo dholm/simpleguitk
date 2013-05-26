@@ -4,6 +4,7 @@
 
 import Tkinter
 import time
+import tkFont
 
 from .constants import map_color
 
@@ -19,9 +20,9 @@ class Canvas(object):
         return elapsed
 
     def __init__(self, master, width, height):
-        self._canvas = Tkinter.Canvas(master, width=width, height=height,
-                                      background='black')
-        self._canvas.pack(fill=Tkinter.X)
+        self._canvas = Tkinter.Canvas(master, width=width, height=height, bd=2,
+                                      bg='black', highlightthickness=0)
+        self._canvas.pack(fill=Tkinter.BOTH, expand=True)
 
         self._draw_handler_fn = None
         self._time = 0
@@ -46,6 +47,9 @@ class Canvas(object):
 
     def set_background(self, color):
         self._canvas.config(background=map_color(color))
+
+    def get_textwidth(self, text, size, face):
+        return tkFont.Font(size=size, family=face).measure(text)
 
     def set_draw_handler(self, draw_handler):
         self._draw_handler_fn = draw_handler

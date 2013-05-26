@@ -4,7 +4,6 @@
 
 import Tkinter
 import sys
-import tkFont
 
 from .canvas import Canvas
 from .control_objects import Button
@@ -24,7 +23,8 @@ class Frame(object):
     def _canvas_init(self, width, height):
         canvas_frame = Tkinter.Frame(self._root)
         self._canvas = Canvas(canvas_frame, width, height)
-        canvas_frame.grid(row=0, column=1, rowspan=2, padx=5, pady=5)
+        canvas_frame.grid(row=0, column=1, rowspan=2, padx=5, pady=5,
+                          sticky=(Tkinter.N, Tkinter.S, Tkinter.W, Tkinter.E))
 
     def _control_frame_init(self, width):
         self._control_frame = Tkinter.Frame(self._root, width=width)
@@ -101,7 +101,7 @@ class Frame(object):
         self._canvas.set_background(color)
 
     def get_canvas_textwidth(self, text, size, face='serif'):
-        return tkFont.Font(size=size, family=face).measure(text)
+        return self._canvas.get_textwidth(text, size, face)
 
 
 def create_frame(title, canvas_width, canvas_height, control_width=200):

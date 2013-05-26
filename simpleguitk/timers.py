@@ -12,6 +12,13 @@ class Timer(object):
         self._timer_handler = timer_handler
         self._running = False
 
+    def __repr__(self):
+        s = ['Timer(', str(self._interval), ', ',
+             repr(self._timer_handler), ')']
+        if self._running:
+            s += [': running']
+        return ''.join(s)
+
     def _schedule(self):
         if self._running:
             interval = self._interval / 1000.0
