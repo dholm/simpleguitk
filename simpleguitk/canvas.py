@@ -3,13 +3,20 @@
 # See the file 'COPYING' for copying permission.
 
 import Tkinter
+import time
 
 from .constants import map_color
 
 
 class Canvas(object):
-    Fps = 100
+    Fps = 60
     IntervalMs = 1000 // Fps
+
+    def _elapsed(self):
+        ms = int(round(time.time() * 1000))
+        elapsed = ms - self._time
+        self._time = ms
+        return elapsed
 
     def __init__(self, master, width, height):
         self._canvas = Tkinter.Canvas(master, width=width, height=height,
@@ -17,6 +24,7 @@ class Canvas(object):
         self._canvas.pack(fill=Tkinter.X)
 
         self._draw_handler_fn = None
+        self._time = 0
         self._draw_handler(master)
 
     def _get_widget(self):
@@ -30,7 +38,8 @@ class Canvas(object):
         if self._draw_handler_fn is not None:
             self._canvas.update_idletasks()
 
-        master.after(Canvas.IntervalMs, self._draw_handler, master)
+        refresh_ms = Canvas.IntervalMs - self._elapsed()
+        master.after(refresh_ms, self._draw_handler, master)
 
     def destroy(self):
         self._draw_handler_fn = None
