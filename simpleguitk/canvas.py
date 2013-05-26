@@ -8,7 +8,7 @@ from .constants import map_color
 
 
 class Canvas(object):
-    Fps = 60
+    Fps = 100
     IntervalMs = 1000 // Fps
 
     def __init__(self, master, width, height):
