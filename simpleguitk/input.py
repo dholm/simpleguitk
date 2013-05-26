@@ -2,6 +2,10 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
+import Tkinter
+
+from .control_objects import Label
+
 
 class KeyMap(object):
     def __init__(self):
@@ -28,11 +32,23 @@ KEY_MAP = KeyMap()
 
 
 class InputAdapter(object):
-    def __init__(self, keyboard_master, mouse_master):
+    def _status_frame_init(self, status_frame):
+        key_frame = Tkinter.LabelFrame(status_frame, text='Key')
+        self._key_label = Label(key_frame, '')
+        mouse_frame = Tkinter.LabelFrame(status_frame, text='Mouse')
+        self._mouse_label = Label(mouse_frame, '')
+        key_frame.pack(fill=Tkinter.X, expand=True)
+        mouse_frame.pack(fill=Tkinter.X, expand=True)
+
+    def __init__(self, status_frame, key_master, mouse_master):
+        self._key_label = None
+        self._mouse_label = None
+        self._status_frame_init(status_frame)
+
         self._keydown_handler = None
         self._keyup_handler = None
-        keyboard_master.bind('<KeyPress>', self._keydown)
-        keyboard_master.bind('<KeyRelease>', self._keyup)
+        key_master.bind('<KeyPress>', self._keydown)
+        key_master.bind('<KeyRelease>', self._keyup)
 
         self._mouse_click_handler = None
         self._mouse_drag_handler = None
@@ -41,18 +57,24 @@ class InputAdapter(object):
 
     def _keydown(self, key):
         if self._keydown_handler is not None:
+            self._key_label.set_text('Down %s' % key.keysym)
             self._keydown_handler(KEY_MAP[key.keysym])
 
     def _keyup(self, key):
         if self._keyup_handler is not None:
+            self._key_label.set_text('Up %s' % key.keysym)
             self._keyup_handler(KEY_MAP[key.keysym])
 
     def _mouse_click(self, event):
         if self._mouse_click_handler is not None:
-            self._mouse_click_handler((event.x, event.y))
+            pos = (event.x, event.y)
+            self._mouse_label.set_text('Click %d, %d' % (pos[0], pos[1]))
+            self._mouse_click_handler(pos)
 
     def _mouse_drag(self, event):
         if self._mouse_drag_handler is not None:
+            pos = (event.x, event.y)
+            self._mouse_label.set_text('Move %d, %d' % (pos[0], pos[1]))
             self._mouse_drag_handler((event.x, event.y))
 
     def set_keydown_handler(self, key_handler):

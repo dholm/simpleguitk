@@ -14,7 +14,7 @@ class Canvas(object):
     def __init__(self, master, width, height):
         self._canvas = Tkinter.Canvas(master, width=width, height=height,
                                       background='black')
-        self._canvas.grid(row=0, column=1, rowspan=2)
+        self._canvas.pack(fill=Tkinter.X)
 
         self._draw_handler_fn = None
         self._draw_handler(master)

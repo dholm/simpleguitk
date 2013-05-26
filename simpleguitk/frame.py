@@ -15,49 +15,42 @@ from .timers import destroy as destroy_timers
 
 
 class Frame(object):
-    def _create_root(self, title, width, height):
+    def _create_root(self, title):
         root = Tkinter.Tk()
-        root.minsize(width, height)
         root.wm_title(title)
         root.protocol('WM_DELETE_WINDOW', root.quit)
         return root
 
-    def _create_canvas(self, width, height):
-        frame = Tkinter.Frame(self._root)
-        frame.grid(column=1, rowspan=2, columnspan=3)
-        canvas = Canvas(frame, width, height)
-        return (frame, canvas)
+    def _canvas_init(self, width, height):
+        canvas_frame = Tkinter.Frame(self._root)
+        self._canvas = Canvas(canvas_frame, width, height)
+        canvas_frame.grid(row=0, column=1, rowspan=2)
 
-    def _create_control_frame(self, width):
-        control_frame = Tkinter.Frame(self._root, width=width)
-        control_frame.grid(row=0, column=0)
-        return control_frame
+    def _control_frame_init(self, width):
+        self._control_frame = Tkinter.Frame(self._root, width=width)
+        self._control_frame.grid(row=0, column=0)
 
-    def _create_status_frame(self):
+    def _input_init(self):
         status_frame = Tkinter.Frame(self._root)
+        canvas_widget = self._canvas._get_widget()
+        self._input = InputAdapter(status_frame, self._root, canvas_widget)
         status_frame.grid(row=1, column=0)
-        key_frame = Tkinter.LabelFrame(status_frame, text='Key:')
-        key_frame.grid(row=0)
-        key_label = Label(key_frame, '')
-        mouse_frame = Tkinter.LabelFrame(status_frame, text='Mouse:')
-        mouse_frame.grid(row=1)
-        mouse_label = Label(mouse_frame, '')
-        return (key_label, mouse_label)
 
     def __init__(self, title, canvas_width, canvas_height, control_width):
-        self._root = self._create_root(title, canvas_width, canvas_height)
+        self._root = self._create_root(title)
 
-        (frame, canvas) = self._create_canvas(canvas_width, canvas_height)
-        self._canvas_frame = frame
-        self._canvas = canvas
+        self._canvas_frame = None
+        self._canvas = None
+        self._canvas_init(canvas_width, canvas_height)
 
-        self._control_frame = self._create_control_frame(control_width)
+        self._control_frame = None
         self._controls = []
+        self._control_frame_init(control_width)
 
-        self._input = InputAdapter(self._root, self._canvas._get_widget())
-        (keys, mouse) = self._create_status_frame()
-        self._key_frame = keys
-        self._mouse_frame = mouse
+        self._input = None
+        self._key_label = None
+        self._mouse_label = None
+        self._input_init()
 
     def _shutdown(self):
         destroy_timers()
