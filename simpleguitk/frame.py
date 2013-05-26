@@ -15,42 +15,37 @@ from .timers import destroy as destroy_timers
 
 
 class Frame(object):
-    def _create_root(self, title):
+    def _create_root(self, title, width, height):
         root = Tkinter.Tk()
+        root.minsize(width, height)
         root.wm_title(title)
         root.protocol('WM_DELETE_WINDOW', root.quit)
         return root
 
-    def _create_frame(self, width, height):
-        frame = Tkinter.Frame(self._root, width=width, height=height)
-        frame.grid()
-        return frame
-
     def _create_canvas(self, width, height):
-        frame = Tkinter.Frame(self._frame)
-        frame.grid(column=1, rowspan=2)
+        frame = Tkinter.Frame(self._root)
+        frame.grid(column=1, rowspan=2, columnspan=3)
         canvas = Canvas(frame, width, height)
         return (frame, canvas)
 
     def _create_control_frame(self, width):
-        control_frame = Tkinter.Frame(self._frame, width=width)
+        control_frame = Tkinter.Frame(self._root, width=width)
         control_frame.grid(row=0, column=0)
         return control_frame
 
     def _create_status_frame(self):
-        status_frame = Tkinter.Frame(self._frame)
+        status_frame = Tkinter.Frame(self._root)
         status_frame.grid(row=1, column=0)
         key_frame = Tkinter.LabelFrame(status_frame, text='Key:')
         key_frame.grid(row=0)
+        key_label = Label(key_frame, '')
         mouse_frame = Tkinter.LabelFrame(status_frame, text='Mouse:')
         mouse_frame.grid(row=1)
-        return (status_frame, key_frame, mouse_frame)
+        mouse_label = Label(mouse_frame, '')
+        return (key_label, mouse_label)
 
     def __init__(self, title, canvas_width, canvas_height, control_width):
-        self._root = self._create_root(title)
-
-        frame = self._create_frame(canvas_width, canvas_height)
-        self._frame = frame
+        self._root = self._create_root(title, canvas_width, canvas_height)
 
         (frame, canvas) = self._create_canvas(canvas_width, canvas_height)
         self._canvas_frame = frame
@@ -60,8 +55,7 @@ class Frame(object):
         self._controls = []
 
         self._input = InputAdapter(self._root, self._canvas._get_widget())
-        (stats, keys, mouse) = self._create_status_frame()
-        self._stats_frame = stats
+        (keys, mouse) = self._create_status_frame()
         self._key_frame = keys
         self._mouse_frame = mouse
 
