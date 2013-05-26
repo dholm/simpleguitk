@@ -35,6 +35,8 @@ class Label(Widget):
     def __init__(self, master, text):
         label = Tkinter.Label(master, text=text)
         super(Label, self).__init__(label, None)
+        text_width = max(len(text), 15)
+        self._widget.config(width=text_width)
 
     def set_text(self, text):
         self._widget.config(text=text)
