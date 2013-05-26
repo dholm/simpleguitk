@@ -5,29 +5,29 @@
 from string import hexdigits
 
 
-ColorMap = {'Aqua': '#00ffff',
-            'Black': '#000000',
-            'Blue': '#0000ff',
-            'Fuchsia': '#ff00ff',
-            'Gray': '#808080',
-            'Green': '#008000',
-            'Lime': '#00ff00',
-            'Maroon': '#800000',
-            'Navy': '#000080',
-            'Olive': '#808000',
-            'Purple': '#800080',
-            'Red': '#ff0000',
-            'Silver': '#c0c0c0',
-            'Teal': '#008080',
-            'White': '#ffffff',
-            'Yellow': '#ffff00'}
+ColorMap = {'aqua': '#00ffff',
+            'black': '#000000',
+            'blue': '#0000ff',
+            'fuchsia': '#ff00ff',
+            'gray': '#808080',
+            'green': '#008000',
+            'lime': '#00ff00',
+            'maroon': '#800000',
+            'navy': '#000080',
+            'olive': '#808000',
+            'purple': '#800080',
+            'red': '#ff0000',
+            'silver': '#c0c0c0',
+            'teal': '#008080',
+            'white': '#ffffff',
+            'yellow': '#ffff00'}
 
 
 def map_color(color):
     if color is None:
         return None
-    elif color in ColorMap:
-        return ColorMap[color]
+    elif color.lower() in ColorMap:
+        return ColorMap[color.lower()]
     elif all(c in hexdigits for c in color):
         return '#%s' % color
     return color
