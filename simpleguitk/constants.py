@@ -28,6 +28,6 @@ def map_color(color):
         return None
     elif color.lower() in ColorMap:
         return ColorMap[color.lower()]
-    elif all(c in hexdigits for c in color):
+    elif len(color) and all(c in hexdigits for c in color):
         return '#%s' % color
     return color

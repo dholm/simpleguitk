@@ -56,7 +56,7 @@ class Canvas(object):
                            map_color(line_color))
 
     def draw_polygon(self, point_list, line_width, line_color,
-                     fill_color=None):
+                     fill_color=''):
         points = [y for x in point_list for y in x]
         self._canvas.create_polygon(points, width=line_width,
                                     fill=map_color(fill_color),
