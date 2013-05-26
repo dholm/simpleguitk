@@ -30,8 +30,13 @@ class Input(object):
         self._content = Tkinter.StringVar()
         self._entry = Tkinter.Entry(master, width=width,
                                     textvariable=self._content)
-        self._entry.bind('<Return>', input_handler)
+        self._input_handler_fn = input_handler
+        self._entry.bind('<Return>', self._input_handler)
         self._entry.grid(column=0)
+
+    def _input_handler(self, _):
+        if self._input_handler_fn is not None:
+            self._input_handler_fn(self._content.get())
 
     def set_text(self, text):
         self._content.set(text)
