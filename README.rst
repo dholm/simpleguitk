@@ -44,6 +44,12 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.0.6**
+
+  * Moves SimpleGUITk version to base directory to avoid dependency cycle during
+    installation.
+
+
 - **1.0.5**
 
   * Ensure canvas refresh is within a reasonable interval.

@@ -9,4 +9,3 @@ from .image import load_image
 from .input import KEY_MAP
 from .sound import load_sound
 from .timers import create_timer
-from .version import __version__

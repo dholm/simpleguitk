@@ -13,7 +13,7 @@ except ImportError:
     use_setuptools()
 
 from setuptools import setup
-from simpleguitk import __version__
+from version import __version__
 
 
 long_description = open(os.path.join(os.path.dirname(__file__),
