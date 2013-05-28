@@ -44,6 +44,13 @@ sure your implementation works as expected.
 Changes
 =======
 
+- **1.1.0**
+
+  * Initial support for SimplePlot via matplotlib.
+  * Support for Python 3.
+  * Fixes size issues with control objects.
+
+
 - **1.0.6**
 
   * Moves SimpleGUITk version to base directory to avoid dependency cycle during
