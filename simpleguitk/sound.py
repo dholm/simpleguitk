@@ -2,15 +2,19 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
-import urllib
+import io
+try:
+    from urllib2 import urlopen
+except ImportError:
+    from urllib.request import urlopen
 
 
 class Sound(object):
     def __init__(self, url, channel):
         import pygame
         self._channel = pygame.mixer.Channel(channel)
-        soundfile = urllib.urlretrieve(url)[0]
-        self._sound = pygame.mixer.Sound(soundfile)
+        soundfile = urlopen(url).read()
+        self._sound = pygame.mixer.Sound(io.BytesIO(soundfile))
         self._paused = False
 
     def play(self):

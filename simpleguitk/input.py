@@ -2,7 +2,10 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
-import Tkinter
+try:
+    import Tkinter as tkinter
+except ImportError:
+    import tkinter
 
 from .control_objects import Label
 
@@ -33,14 +36,14 @@ KEY_MAP = KeyMap()
 
 class InputAdapter(object):
     def _status_frame_init(self, status_frame):
-        key_frame = Tkinter.LabelFrame(status_frame, text='Key')
+        key_frame = tkinter.LabelFrame(status_frame, text='Key')
         self._key_label = Label(key_frame, '')
 
-        mouse_frame = Tkinter.LabelFrame(status_frame, text='Mouse')
+        mouse_frame = tkinter.LabelFrame(status_frame, text='Mouse')
         self._mouse_label = Label(mouse_frame, '')
 
-        key_frame.pack(fill=Tkinter.BOTH)
-        mouse_frame.pack(fill=Tkinter.BOTH)
+        key_frame.pack(fill=tkinter.BOTH)
+        mouse_frame.pack(fill=tkinter.BOTH)
 
     def __init__(self, status_frame, key_master, mouse_master):
         self._key_label = None
