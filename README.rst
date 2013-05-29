@@ -49,6 +49,13 @@ To use SimplePlot just import it the same way as in CodeSkulptor.
 Changes
 =======
 
+- **1.1.1**
+
+  * matplotlib is no longer a strict requirement as it is only needed for
+    SimplePlot.
+  * Force division to behave like in Python 3 when running in Python 2.
+
+
 - **1.1.0**
 
   * Initial support for SimplePlot via matplotlib.
