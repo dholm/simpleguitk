@@ -2,6 +2,8 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
+from __future__ import division
+
 try:
     import matplotlib.pyplot
 except ImportError:
