@@ -2,7 +2,11 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
-import matplotlib.pyplot
+try:
+    import matplotlib.pyplot
+except ImportError:
+    print('matplotlib must be installed in order to use SimplePlot!')
+    raise
 
 
 def plot_lines(framename, width, height, xlabel, ylabel, datasets,

@@ -21,6 +21,7 @@ Requirements
 
  * `Pillow <https://github.com/python-imaging/Pillow>`_ in order to use images.
  * `Pygame <http://www.pygame.org/>`_ for sound support.
+ * `matplotlib <http://matplotlib.org/>`_ for SimplePlot support.
 
 None of these are strict requirements as SimpleGUITk will run without them as
 long as you don't need to use the *SimpleGUI Images* or *SimpleGUI Sounds*
@@ -39,6 +40,10 @@ Assuming you intend to eventually run your code in CodeSkulptor make it a habit
 to test it often. As of this writing some of Python's language features are
 unavailable in CodeSkulptor and catching these early on makes it easier to make
 sure your implementation works as expected.
+
+To use SimplePlot just import it the same way as in CodeSkulptor.
+
+    import simpleplot
 
 
 Changes
