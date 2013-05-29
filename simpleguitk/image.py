@@ -2,6 +2,8 @@
 # This file is part of SimpleGUITk - https://github.com/dholm/simpleguitk
 # See the file 'COPYING' for copying permission.
 
+from __future__ import division
+
 import io
 try:
     from urllib2 import urlopen
