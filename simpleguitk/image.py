@@ -37,8 +37,9 @@ class Image(object):
                     int(center[0] + wh_src[0] // 2),
                     int(center[1] + wh_src[1] // 2))
             image = self._image.crop([int(x) for x in crop])
-            image = image.resize([int(x) for x in wh_dst],
-                                 resample=PilImage.BILINEAR)
+            if wh_src != wh_dst:
+                image = image.resize([int(x) for x in wh_dst],
+                                     resample=PilImage.BILINEAR)
             image = image.rotate(-rot, resample=PilImage.BICUBIC, expand=1)
             self._versions[version] = ImageTk.PhotoImage(image)
         return self._versions[version]
