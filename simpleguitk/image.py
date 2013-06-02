@@ -32,15 +32,17 @@ class Image(object):
         from PIL import ImageTk
         version = ','.join([str(center), str(wh_src), str(wh_dst), str(rot)])
         if version not in self._versions:
+            image = self._image
             crop = (int(center[0] - wh_src[0] // 2),
                     int(center[1] - wh_src[1] // 2),
                     int(center[0] + wh_src[0] // 2),
                     int(center[1] + wh_src[1] // 2))
-            image = self._image.crop([int(x) for x in crop])
+            image = image.crop([int(x) for x in crop])
             if wh_src != wh_dst:
                 image = image.resize([int(x) for x in wh_dst],
                                      resample=PilImage.BILINEAR)
-            image = image.rotate(-rot, resample=PilImage.BICUBIC, expand=1)
+            if rot != 0:
+                image = image.rotate(-rot, resample=PilImage.BICUBIC, expand=1)
             self._versions[version] = ImageTk.PhotoImage(image)
         return self._versions[version]
 
