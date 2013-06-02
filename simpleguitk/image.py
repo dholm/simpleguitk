@@ -14,7 +14,10 @@ except ImportError:
 class Image(object):
     def __init__(self, url):
         from PIL import Image as PilImage
-        image = urlopen(url).read()
+        if url.startswith('http'):
+            image = urlopen(url).read()
+        else:
+            image = open(url).read()
         self._image = PilImage.open(io.BytesIO(image)).convert('RGBA')
         self._versions = {}
 
