@@ -49,6 +49,13 @@ To use SimplePlot just import it the same way as in CodeSkulptor.
 Changes
 =======
 
+- **1.1.2**
+
+  * Supports loading data from local filesystems.
+  * Fixes rotation bug in images.
+  * Some minor optimizations in image rendering.
+
+
 - **1.1.1**
 
   * matplotlib is no longer a strict requirement as it is only needed for
