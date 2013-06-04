@@ -49,6 +49,13 @@ To use SimplePlot just import it the same way as in CodeSkulptor.
 Changes
 =======
 
+- **1.1.3**
+
+  * Key release events are only sent on true release.
+  * Repeated calls to sound play will do nothing if the sound is already
+    playing.
+
+
 - **1.1.2**
 
   * Supports loading data from local filesystems.
