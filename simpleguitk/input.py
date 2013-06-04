@@ -52,8 +52,10 @@ class InputAdapter(object):
         self._mouse_label = None
         self._status_frame_init(status_frame)
 
+        self._key_after_id = None
         self._keydown_handler = None
         self._keyup_handler = None
+        self._key_master = key_master
         key_master.bind('<KeyPress>', self._keydown)
         key_master.bind('<KeyRelease>', self._keyup)
 
@@ -64,13 +66,22 @@ class InputAdapter(object):
 
     def _keydown(self, key):
         if self._keydown_handler is not None:
-            self._key_label.set_text('Down %s' % key.keysym)
-            self._keydown_handler(KEY_MAP[key.keysym])
+            if self._key_after_id is not None:
+                self._key_master.after_cancel(self._key_after_id)
+                self._key_after_id = None
+            else:
+                self._key_label.set_text('Down %s' % key.keysym)
+                self._keydown_handler(KEY_MAP[key.keysym])
 
-    def _keyup(self, key):
+    def _keyup_no_bounce(self, key):
         if self._keyup_handler is not None:
             self._key_label.set_text('Up %s' % key.keysym)
             self._keyup_handler(KEY_MAP[key.keysym])
+        self._key_after_id = None
+
+    def _keyup(self, key):
+        after_id = self._key_master.after_idle(self._keyup_no_bounce, key)
+        self._key_after_id = after_id
 
     def _mouse_click(self, event):
         if self._mouse_click_handler is not None:
