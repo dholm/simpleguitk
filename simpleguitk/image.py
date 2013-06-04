@@ -31,7 +31,7 @@ class Image(object):
     def _get_tkimage(self, center, wh_src, wh_dst, rot):
         from PIL import Image as PilImage
         from PIL import ImageTk
-        rot = int(math.degrees(rot))
+        rot = -int(math.degrees(rot))
         version = ','.join([str(center), str(wh_src), str(wh_dst), str(rot)])
         if version not in self._versions:
             image = self._image
