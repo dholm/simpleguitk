@@ -12,9 +12,9 @@ except ImportError:
 
 
 class Sound(object):
-    def __init__(self, url, channel):
+    def __init__(self, url):
         import pygame
-        self._channel = pygame.mixer.Channel(channel)
+        self._channel = None
         if url.startswith('http'):
             soundfile = urlopen(url).read()
         else:
@@ -23,32 +23,34 @@ class Sound(object):
         self._paused = False
 
     def play(self):
-        if self._paused:
-            self._paused = False
-            self._channel.unpause()
+        self._paused = False
+        if self._channel is not None:
+            if not self._channel.get_busy():
+                self._channel.play(self._sound)
+            elif self._paused:
+                self._channel.unpause()
         else:
-            self._channel.play(self._sound)
+            self._channel = self._sound.play()
 
     def pause(self):
-        self._channel.pause()
-        self._paused = True
+        if self._channel is not None:
+            self._paused = True
+            self._channel.pause()
 
     def rewind(self):
-        self._channel.stop()
+        if self._channel is not None:
+            self._channel.stop()
 
     def set_volume(self, volume):
-        self._channel.set_volume(volume)
+        self._sound.set_volume(volume)
 
-MAX_CHANNELS = 32
 _initialized = False
-_next_channel = 0
 
 
 def sound_init():
     global _initialized
     import pygame
     pygame.mixer.init()
-    pygame.mixer.set_num_channels(MAX_CHANNELS)
     _initialized = True
 
 
@@ -57,5 +59,4 @@ def load_sound(URL):
     if not _initialized:
         sound_init()
 
-    _next_channel += 1
-    return Sound(URL, _next_channel - 1)
+    return Sound(URL)
