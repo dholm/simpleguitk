@@ -1,8 +1,8 @@
 .. -*- restructuredtext -*-
 
-===========
-SimpleGUITk
-===========
+=============
+ SimpleGUITk
+=============
 
 **SimpleGUITk** is a wrapper for the `CodeSkulptor
 <http://www.codeskulptor.org/>`_ *SimpleGUI* API using *TkInter*.
@@ -40,6 +40,11 @@ Assuming you intend to eventually run your code in CodeSkulptor make it a habit
 to test it often. As of this writing some of Python's language features are
 unavailable in CodeSkulptor and catching these early on makes it easier to make
 sure your implementation works as expected.
+
+One important difference between SimpleGUITk and CodeSkulptor is that due to
+the design of TkInter the call to *frame.start()* is going to block until the
+application terminates. Simply make sure that it is called as the last line of
+the application.
 
 To use SimplePlot just import it the same way as in CodeSkulptor.
 
