@@ -37,7 +37,8 @@ class Frame(object):
         self._control_frame.grid(row=0, column=0, padx=5, pady=5)
 
     def _input_init(self):
-        status_frame = tkinter.Frame(self._root)
+        status_frame = tkinter.Frame(self._root, width=120, height=85)
+        status_frame.pack_propagate(0)
         canvas_widget = self._canvas._get_widget()
         self._input = InputAdapter(status_frame, self._root, canvas_widget)
         status_frame.grid(row=1, column=0, sticky=(tkinter.W, tkinter.E),
