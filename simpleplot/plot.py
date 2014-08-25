@@ -12,7 +12,7 @@ except ImportError:
 
 
 def plot_lines(framename, width, height, xlabel, ylabel, datasets,
-               points=False, legends=None):
+               points=False, legends=[]):
     matplotlib.pyplot.title(framename)
     matplotlib.pyplot.xlabel(xlabel)
     matplotlib.pyplot.ylabel(ylabel)
