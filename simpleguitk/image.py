@@ -17,9 +17,9 @@ class Image(object):
         from PIL import Image as PilImage
         if url.startswith('http'):
             image = urlopen(url).read()
+            self._image = PilImage.open(io.BytesIO(image)).convert('RGBA')
         else:
-            image = open(url).read()
-        self._image = PilImage.open(io.BytesIO(image)).convert('RGBA')
+            self._image = PilImage.open(url).convert('RGBA')
         self._versions = {}
 
     def get_width(self):
